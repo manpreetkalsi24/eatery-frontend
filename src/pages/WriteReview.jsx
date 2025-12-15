@@ -12,7 +12,7 @@ function WriteReview() {
   const submitReview = async (e) => {
     e.preventDefault();
 
-    await fetch("https://restaurant-backend-fjsw.onrender.com/api/reviews", {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/reviews`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
