@@ -1,29 +1,25 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { api } from "../api";
 import "./Home.css";
 import { Link } from "react-router-dom";
 
+
 export default function Home() {
   const [menuItems, setMenuItems] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
-  // Fetching first 6 menu items from backend
   useEffect(() => {
-    axios
-      .get("https://restaurant-backend-fjsw.onrender.com/api/menu")
-      .then((res) => {
-        setMenuItems(res.data.slice(0, 6)); 
-      })
-      .catch((err) => console.error("Error fetching menu:", err));
+    api
+      .get("/menu")
+      .then((res) => setMenuItems(res.data.slice(0, 6)))
+      .catch((err) => console.error("Menu error:", err));
+
+    api
+      .get("/reviews")
+      .then((res) => setReviews(res.data))
+      .catch((err) => console.error("Review error:", err));
   }, []);
 
-  // const [reviews, setReviews] = useState([]);
-
-  // useEffect(() => {
-  //   fetch("https://restaurant-backend-fjsw.onrender.com/api/reviews")
-  //     .then((res) => res.json())
-  //     .then((data) => setReviews(data))
-  //     .catch((err) => console.error(err));
-  // }, []);
 
   return (
     <div className="home-page">
@@ -113,7 +109,7 @@ export default function Home() {
       </section>
 
       {/* Client Reviews Section */}
-      {/* <section className="client-reviews">
+      <section className="client-reviews">
         <h2>Customer Reviews</h2>
 
         <div className="reviews-grid">
@@ -146,7 +142,7 @@ export default function Home() {
             Write a Review
           </Link>
         </div>
-      </section> */}
+      </section>
 
     </div>
   );
