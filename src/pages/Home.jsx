@@ -19,7 +19,7 @@ export default function Home() {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("https://restaurant-backend-fjsw.onrender.com/api/reviews")
+    fetch(`${import.meta.env.VITE_API_URL}/api/reviews`)
       .then((res) => res.json())
       .then((data) => setReviews(data))
       .catch((err) => console.error(err));
