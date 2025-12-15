@@ -35,7 +35,7 @@ export default function Menu() {
         {menuItems.map((item) => (
           <div className="menu-box" key={item._id}>
             <img
-              src={`${import.meta.env.VITE_API_URL}${item.image}`}
+              src={`https://restaurant-backend-fjsw.onrender.com${item.image}`}
               alt={item.name}
               className="menu-image"
             />
