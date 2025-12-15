@@ -16,14 +16,14 @@ export default function Home() {
       .catch((err) => console.error("Error fetching menu:", err));
   }, []);
 
-  const [reviews, setReviews] = useState([]);
+  // const [reviews, setReviews] = useState([]);
 
-  useEffect(() => {
-    fetch("https://restaurant-backend-fjsw.onrender.com/api/reviews")
-      .then((res) => res.json())
-      .then((data) => setReviews(data))
-      .catch((err) => console.error(err));
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://restaurant-backend-fjsw.onrender.com/api/reviews")
+  //     .then((res) => res.json())
+  //     .then((data) => setReviews(data))
+  //     .catch((err) => console.error(err));
+  // }, []);
 
   return (
     <div className="home-page">
@@ -113,7 +113,7 @@ export default function Home() {
       </section>
 
       {/* Client Reviews Section */}
-      <section className="client-reviews">
+      {/* <section className="client-reviews">
         <h2>Customer Reviews</h2>
 
         <div className="reviews-grid">
@@ -146,7 +146,7 @@ export default function Home() {
             Write a Review
           </Link>
         </div>
-      </section>
+      </section> */}
 
     </div>
   );
