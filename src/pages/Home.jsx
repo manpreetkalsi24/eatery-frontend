@@ -19,7 +19,7 @@ export default function Home() {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8888/api/reviews")
+    fetch("https://restaurant-backend-fjsw.onrender.com/api/reviews")
       .then((res) => res.json())
       .then((data) => setReviews(data))
       .catch((err) => console.error(err));
