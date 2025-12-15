@@ -1,25 +1,21 @@
 import { useEffect, useState } from "react";
-import { api } from "../api";
+import axios from "axios";
 import "./Home.css";
 import { Link } from "react-router-dom";
 
 
 export default function Home() {
   const [menuItems, setMenuItems] = useState([]);
-  const [reviews, setReviews] = useState([]);
 
+  // Fetching first 6 menu items from backend
   useEffect(() => {
-    api
-      .get("/menu")
-      .then((res) => setMenuItems(res.data.slice(0, 6)))
-      .catch((err) => console.error("Menu error:", err));
-
-    api
-      .get("/reviews")
-      .then((res) => setReviews(res.data))
-      .catch((err) => console.error("Review error:", err));
+    axios
+      .get("https://restaurant-backend-fjsw.onrender.com/api/menu")
+      .then((res) => {
+        setMenuItems(res.data.slice(0, 6)); 
+      })
+      .catch((err) => console.error("Error fetching menu:", err));
   }, []);
-
 
   return (
     <div className="home-page">
@@ -104,42 +100,6 @@ export default function Home() {
           <h2>Elevate your dining experience to a higher quality.</h2>
           <Link to="/reservations" className="btn-primary">
             Make a Reservation
-          </Link>
-        </div>
-      </section>
-
-      {/* Client Reviews Section */}
-      <section className="client-reviews">
-        <h2>Customer Reviews</h2>
-
-        <div className="reviews-grid">
-          {reviews.length ? (
-            reviews.map((review) => (
-              <div className="review-card" key={review._id}>
-                <p>“{review.message}”</p>
-                <h4>{review.name}</h4>
-                <div className="review-stars">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <i
-                      key={star}
-                      className={
-                        star <= review.rating
-                          ? "fa-solid fa-star star filled"
-                          : "fa-regular fa-star star"
-                      }
-                    ></i>
-                  ))}
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>No reviews yet.</p>
-          )}
-        </div>
-
-        <div className="view-all">
-          <Link to="/write-review" className="btn-primary">
-            Write a Review
           </Link>
         </div>
       </section>
